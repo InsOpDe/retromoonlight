@@ -6,7 +6,7 @@ CONFIG=$(<./menu_config.txt)
 DIRECTORY=/home/pi/.emulationstation/es_systems.cfg
 
 if [ -f $DIRECTORY ]
-then	
+then
     echo -e "Removing Duplicate Systems File"
     rm $DIRECTORY
 fi
@@ -19,6 +19,11 @@ sudo sed -i -e 's|</systemList>|  <system>\n    <name>moonlight</name>\n    <ful
 
 echo -e "\nMoonlight menu added to RetroPie..."
 
+
+echo -e "Adding Steamlink to Systems"
+sudo sed -i -e 's|</systemList>|  <system>\n    <name>steamlink</name>\n    <fullname>SteamLink</fullname>\n    <path>~/RetroPie/roms/steamlink</path>\n    <extension>.sh .SH</extension>\n    <command>/usr/bin/startx ~/RetroPie/roms/steamlink/launch_steamlink.sh</command>\n    <platform>pc</platform>\n    <theme>moonlight</theme>\n  </system>\n</systemList>|g' $DIRECTORY
+
+echo -e "\nSteamLink menu added to RetroPie..."
 echo -e "Adding Plex to Systems"
 sed -i -e 's|</systemList>|  <system>\n    <name>plex</name>\n    <fullname>Plex</fullname>\n    <path>~/RetroPie/roms/plex</path>\n    <extension>.sh .SH</extension>\n    <command>/usr/bin/startx ~/RetroPie/roms/plex/launch_plex.sh</command>\n    <platform>pc</platform>\n    <theme>plex</theme>\n  </system>\n</systemList>|g' $DIRECTORY
 
